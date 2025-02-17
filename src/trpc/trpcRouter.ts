@@ -31,6 +31,8 @@ export const trpcRouter = t.router({
       });
       if (!post) {
         throw new Error("Post not found");
+        // TODO (Error Handling): Add a custom error type for better error handling
+        // and use a logging library like Sentry or LogRocket for better error tracking
       }
       const newComment = await prismaClient.comment.create({
         data: { content: comment, postId: postId },
