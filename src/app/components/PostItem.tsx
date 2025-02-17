@@ -67,12 +67,12 @@ export function PostItem({
     <StyledPost key={post.id}>
       <h2>{post.title}</h2>
       <p>{post.content}</p>
-      {post.comments.length > 0 && (
-        <CommentSection>
-          <CommentsSectionHeader>
-            <Typography variant="h6" component={"h3"}>
-              Comments ({post.comments.length})
-            </Typography>
+      <CommentSection>
+        <CommentsSectionHeader>
+          <Typography variant="h6" component={"h3"}>
+            Comments ({post.comments.length})
+          </Typography>
+          {post.comments.length > 0 && (
             <Button
               variant="contained"
               color="primary"
@@ -80,27 +80,27 @@ export function PostItem({
             >
               {commentsVisible ? "Hide Comments" : "Show Comments"}
             </Button>
-          </CommentsSectionHeader>
-          {commentsVisible &&
-            post.comments.map((comment) => (
-              <Comment key={comment.id}>{comment.content}</Comment>
-            ))}
-          <CommentInputWrapper>
-            <Input
-              placeholder="Add a comment"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleAddComment}
-            >
-              Add Comment
-            </Button>
-          </CommentInputWrapper>
-        </CommentSection>
-      )}
+          )}
+        </CommentsSectionHeader>
+        {commentsVisible &&
+          post.comments.map((comment) => (
+            <Comment key={comment.id}>{comment.content}</Comment>
+          ))}
+        <CommentInputWrapper>
+          <Input
+            placeholder="Add a comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleAddComment}
+          >
+            Add Comment
+          </Button>
+        </CommentInputWrapper>
+      </CommentSection>
     </StyledPost>
   );
 }
