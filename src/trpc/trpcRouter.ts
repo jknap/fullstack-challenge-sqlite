@@ -15,6 +15,26 @@ export const trpcRouter = t.router({
       },
     });
   }),
+  addComment: t.procedure
+    .input(
+      z.object({
+        postId: z.number(),
+        comment: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { postId, comment } = input;
+      const post = await prismaClient.post.findUnique({
+        where: { id: postId },
+      });
+      if (!post) {
+        throw new Error("Post not found");
+      }
+      const newComment = await prismaClient.comment.create({
+        data: { content: comment, postId: postId },
+      });
+      return newComment;
+    }),
 });
 
 export type TrpcRouter = typeof trpcRouter;

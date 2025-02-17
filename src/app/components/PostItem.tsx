@@ -1,5 +1,6 @@
 import { Post } from "@prisma/client";
 import styled from "@emotion/styled";
+import { Input } from "@mui/material";
 import { Button } from "@mui/material";
 import { Typography } from "@mui/material";
 import { PostType } from "@/trpc/trpcRouter";
@@ -22,6 +23,9 @@ const CommentSection = styled.div`
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const CommentsSectionHeader = styled.div`
@@ -38,8 +42,27 @@ const Comment = styled.div`
   font-size: 0.9rem;
 `;
 
-export function PostItem({ post }: { post: PostType }) {
+const CommentInputWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+export function PostItem({
+  post,
+  onAddComment,
+}: {
+  post: PostType;
+  onAddComment: (postId: number, comment: string) => void;
+}) {
   const [commentsVisible, setCommentsVisible] = useState(false);
+  const [comment, setComment] = useState("");
+  const handleAddComment = async () => {
+    await onAddComment(post.id, comment);
+    setComment("");
+    setCommentsVisible(true);
+  };
   return (
     <StyledPost key={post.id}>
       <h2>{post.title}</h2>
@@ -62,6 +85,20 @@ export function PostItem({ post }: { post: PostType }) {
             post.comments.map((comment) => (
               <Comment key={comment.id}>{comment.content}</Comment>
             ))}
+          <CommentInputWrapper>
+            <Input
+              placeholder="Add a comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleAddComment}
+            >
+              Add Comment
+            </Button>
+          </CommentInputWrapper>
         </CommentSection>
       )}
     </StyledPost>

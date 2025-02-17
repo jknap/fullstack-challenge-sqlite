@@ -10,11 +10,17 @@ const PostsContainer = styled.div`
   align-items: center;
 `;
 
-export function PostsList({ posts }: { posts: PostType[] }) {
+export function PostsList({
+  posts,
+  onAddComment,
+}: {
+  posts: PostType[];
+  onAddComment: (postId: number, comment: string) => void;
+}) {
   return (
     <PostsContainer>
       {posts.map((post) => (
-        <PostItem key={post.id} post={post} />
+        <PostItem key={post.id} post={post} onAddComment={onAddComment} />
       ))}
     </PostsContainer>
   );
