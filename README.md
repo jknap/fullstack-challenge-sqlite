@@ -1,4 +1,4 @@
-# Fanvue's Fullstack challenge
+# Fullstack challenge
 
 Setup the project:
 
