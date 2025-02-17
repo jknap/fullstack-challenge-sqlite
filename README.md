@@ -31,3 +31,8 @@ Consider the following, for instance leaving comments close to where this is rel
 - How monitoring and logging could be implemented
 - SSR and SSG
 - Possible infrastructure setup to help with the above
+
+TODO (infra):
+
+- Add a CI/CD pipeline to the project
+- If pricing is not an issue, use VERCEL for the deployment and monitoring as it's a complete solution for NextJS
