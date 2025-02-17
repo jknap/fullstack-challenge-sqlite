@@ -5,6 +5,8 @@ import { Typography } from "@mui/material";
 import { PostsList } from "./components/PostsList";
 
 export default function Home() {
+  // TODO (Performance): Add pagination to improve performance (limit and offset)
+  // Can also use useInfiniteQuery from trpc
   const { data: posts } = trpcReact.getPosts.useQuery();
   const addComment = trpcReact.addComment.useMutation();
   const utils = trpcReact.useUtils();
@@ -21,6 +23,7 @@ export default function Home() {
       <Typography variant="h4" component={"h1"}>
         Posts
       </Typography>
+      {/* TODO (Performance): Add a pagination component or infinite scroll to improve performance */}
       <PostsList posts={posts} onAddComment={handleAddComment} />
     </main>
   );

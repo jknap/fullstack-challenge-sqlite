@@ -8,6 +8,8 @@ const t = initTRPC.create({
 });
 
 export const trpcRouter = t.router({
+  // TODO (Performance): Add pagination to improve performance (limit and offset)
+  // Can also use useInfiniteQuery from trpc
   getPosts: t.procedure.query(async ({ ctx, input }) => {
     return await prismaClient.post.findMany({
       include: {
