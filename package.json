@@ -21,7 +21,7 @@
     "@trpc/react-query": "^10.45.2",
     "@trpc/server": "^10.45.2",
     "deverything": "^1.0.0",
-    "next": "14.2.5",
+    "next": "^14.2.24",
     "react": "^18",
     "react-dom": "^18",
     "sqlite3": "^5.1.7",
