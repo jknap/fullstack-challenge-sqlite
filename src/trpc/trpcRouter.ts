@@ -1,5 +1,5 @@
 import { prismaClient } from "../../prisma/prismaClient";
-import { initTRPC } from "@trpc/server";
+import { inferRouterOutputs, initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { z } from "zod";
 
@@ -8,10 +8,15 @@ const t = initTRPC.create({
 });
 
 export const trpcRouter = t.router({
-  // example endpoint...
   getPosts: t.procedure.query(async ({ ctx, input }) => {
-    return await prismaClient.post.findMany();
+    return await prismaClient.post.findMany({
+      include: {
+        comments: true,
+      },
+    });
   }),
 });
 
 export type TrpcRouter = typeof trpcRouter;
+type RouterOutput = inferRouterOutputs<TrpcRouter>;
+export type PostType = RouterOutput["getPosts"][0];
