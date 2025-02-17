@@ -6,6 +6,9 @@ import { useState } from "react";
 import superjson from "superjson";
 import { trpcReact } from "@/trpc/trpcReact";
 
+// TODO (SSR): Implement server-side rendering (SSR) for initial page load and SEO optimization
+// It seems like trpc has built-in support for SSR, see https://trpc.io/docs/client/nextjs/ssr
+
 export const TrpcProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
